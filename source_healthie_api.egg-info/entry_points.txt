@@ -1,0 +1,3 @@
+[console_scripts]
+source-healthie-api = source_healthie_api.run:run
+
