@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": ["null", "string"]
+        },
+        "name": {
+            "type": ["null", "string"]
+        },
+        "is_multiple_providers": {
+            "type": ["null", "boolean"]
+        },
+        "has_forms_after_welcome": {
+            "type": ["null", "boolean"]
+        }
+    }
+}
