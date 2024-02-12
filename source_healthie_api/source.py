@@ -89,10 +89,7 @@ class Users(HealthieApiStream):
         current_data = response.json().get("data", {}).get("users", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -131,10 +128,7 @@ class AppointmentTypes(HealthieApiStream):
         current_data = response.json().get("data", {}).get("appointmentTypes", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -173,10 +167,7 @@ class Appointments(HealthieApiStream):
         current_data = response.json().get("data", {}).get("appointments", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -243,10 +234,7 @@ class Conversations(HealthieApiStream):
         current_data = response.json().get("data", {}).get("conversationMemberships", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -312,10 +300,7 @@ class Forms(HealthieApiStream):
         current_data = response.json().get("data", {}).get("customModuleForms", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -354,10 +339,7 @@ class OnboardingFlows(HealthieApiStream):
         current_data = response.json().get("data", {}).get("onboardingFlows", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -396,10 +378,7 @@ class OrganizationMembers(HealthieApiStream):
         current_data = response.json().get("data", {}).get("organizationMembers", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
@@ -438,10 +417,7 @@ class Programs(HealthieApiStream):
         current_data = response.json().get("data", {}).get("courses", [])
         if not current_data:
             return None
-        
-        if self.current_offset > 30:
-            return None
-        
+                
         self.current_offset += len(current_data)
         return {"offset": self.current_offset}
     
