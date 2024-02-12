@@ -130,7 +130,7 @@ class AppointmentTypes(HealthieApiStream):
             return None
                 
         self.current_offset += len(current_data)
-        return {"offset": self.current_offset}
+        return {"offset": self.current_offset, "should_paginate": True}
     
     def parse_response(
         self,
@@ -149,7 +149,7 @@ class AppointmentTypes(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
         
-        variables = {}
+        variables = {"should_paginate": True}
         if next_page_token:
             variables = next_page_token
 
@@ -169,7 +169,7 @@ class Appointments(HealthieApiStream):
             return None
                 
         self.current_offset += len(current_data)
-        return {"offset": self.current_offset}
+        return {"offset": self.current_offset, "should_paginate": True}
     
     def parse_response(
         self,
@@ -188,7 +188,7 @@ class Appointments(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
         
-        variables = {}
+        variables = {"should_paginate": True}
         if next_page_token:
             variables = next_page_token
 
@@ -197,6 +197,9 @@ class Appointments(HealthieApiStream):
 
 class AvailableItemTypes(HealthieApiStream):
     primary_key = "id"
+
+    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
+        return None
     
     def parse_response(
         self,
@@ -264,6 +267,9 @@ class Conversations(HealthieApiStream):
 
 class FormCompletionRequests(HealthieApiStream):
     primary_key = "id"
+
+    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
+        return None
     
     def parse_response(
         self,
@@ -302,7 +308,7 @@ class Forms(HealthieApiStream):
             return None
                 
         self.current_offset += len(current_data)
-        return {"offset": self.current_offset}
+        return {"offset": self.current_offset, "should_paginate": True}
     
     def parse_response(
         self,
@@ -321,7 +327,7 @@ class Forms(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
 
-        variables = {}
+        variables = {"should_paginate": True}
         if next_page_token:
             variables = next_page_token
 
@@ -341,7 +347,7 @@ class OnboardingFlows(HealthieApiStream):
             return None
                 
         self.current_offset += len(current_data)
-        return {"offset": self.current_offset}
+        return {"offset": self.current_offset, "should_paginate": True}
     
     def parse_response(
         self,
@@ -360,7 +366,7 @@ class OnboardingFlows(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
 
-        variables = {}
+        variables = {"should_paginate": True}
         if next_page_token:
             variables = next_page_token
 
@@ -419,7 +425,7 @@ class Programs(HealthieApiStream):
             return None
                 
         self.current_offset += len(current_data)
-        return {"offset": self.current_offset}
+        return {"offset": self.current_offset, "should_paginate": True}
     
     def parse_response(
         self,
@@ -438,7 +444,7 @@ class Programs(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
         
-        variables = {}
+        variables = {"should_paginate": True}
         if next_page_token:
             variables = next_page_token
 
@@ -447,6 +453,9 @@ class Programs(HealthieApiStream):
 
 class UnassociatedCompletedOnboardingItems(HealthieApiStream):
     primary_key = "id"
+
+    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
+        return None
     
     def parse_response(
         self,
