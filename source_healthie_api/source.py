@@ -31,7 +31,17 @@ from .graph_ql_queries import (
 
 # Basic full refresh stream
 class HealthieApiStream(HttpStream, ABC):
-    url_base = "https://staging-api.gethealthie.com/graphql"
+    # url_base = "https://staging-api.gethealthie.com/graphql"
+
+    def __init__(self, config: Mapping[str, Any], **kwargs):
+        super().__init__(**kwargs)
+        self._base_url = config.get("base_url")
+    
+
+    @property
+    def url_base(self) -> str:
+        return self._base_url
+    
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         """
@@ -81,8 +91,8 @@ class HealthieApiStream(HttpStream, ABC):
 class Users(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -120,8 +130,8 @@ class Users(HealthieApiStream):
 class AppointmentTypes(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -159,8 +169,8 @@ class AppointmentTypes(HealthieApiStream):
 class Appointments(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -229,8 +239,8 @@ class AvailableItemTypes(HealthieApiStream):
 class Conversations(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -298,8 +308,8 @@ class FormCompletionRequests(HealthieApiStream):
 class Forms(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -337,8 +347,8 @@ class Forms(HealthieApiStream):
 class OnboardingFlows(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -376,8 +386,8 @@ class OnboardingFlows(HealthieApiStream):
 class OrganizationMembers(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -415,8 +425,8 @@ class OrganizationMembers(HealthieApiStream):
 class Programs(HealthieApiStream):
     primary_key = "id"
 
-    def __init__(self, authenticator):
-        super().__init__(authenticator)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.current_offset = 0
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
@@ -506,13 +516,14 @@ class SourceHealthieApi(AbstractSource):
 
             data = {"query": graph_ql_query, "variables": {}}
             api_key = config.get("apikey")
+            base_url = config.get("base_url")
             headers = {
                 "Authorization": f"Basic {api_key}",
                 "Content-Type": "application/json",
                 "AuthorizationSource": "API"
             }
 
-            response = requests.post(url="https://staging-api.gethealthie.com/graphql", json=data, headers=headers)
+            response = requests.post(url=base_url, json=data, headers=headers)
             data = response.json()
             logger.info(f"Data: {data}")
             if data.get("errors"):
@@ -533,15 +544,15 @@ class SourceHealthieApi(AbstractSource):
         """
         auth = TokenAuthenticator(token=config.get("apikey"), auth_method="Basic")
         return [
-            Users(authenticator=auth),
-            AppointmentTypes(authenticator=auth),
-            Appointments(authenticator=auth),
-            AvailableItemTypes(authenticator=auth),
-            Conversations(authenticator=auth),
-            FormCompletionRequests(authenticator=auth),
-            Forms(authenticator=auth),
-            OnboardingFlows(authenticator=auth),
-            OrganizationMembers(authenticator=auth),
-            Programs(authenticator=auth),
-            UnassociatedCompletedOnboardingItems(authenticator=auth),
+            Users(authenticator=auth, config=config),
+            AppointmentTypes(authenticator=auth, config=config),
+            Appointments(authenticator=auth, config=config),
+            AvailableItemTypes(authenticator=auth, config=config),
+            Conversations(authenticator=auth, config=config),
+            FormCompletionRequests(authenticator=auth, config=config),
+            Forms(authenticator=auth, config=config),
+            OnboardingFlows(authenticator=auth, config=config),
+            OrganizationMembers(authenticator=auth, config=config),
+            Programs(authenticator=auth, config=config),
+            UnassociatedCompletedOnboardingItems(authenticator=auth, config=config),
         ]
