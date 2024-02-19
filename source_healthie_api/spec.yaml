@@ -5,9 +5,12 @@ connectionSpecification:
   type: object
   required:
     - apikey
+    - base_url
   properties:
     apikey:
       type: string
       description: API access key used to retrieve data from the Healthie API.
       airbyte_secret: true
-
+    base_url:
+      type: string
+      description: The base url for the Healthie API.
