@@ -303,3 +303,34 @@ query getUnassociatedCompletedOnboardingItems(
   }
 }
 """
+
+availabilities_query = """
+query(
+  $show_availability: Boolean,
+  $one_time: Boolean,
+  $is_repeating: Boolean,
+  $startDate: String,
+  $endDate: String
+) {
+  availabilities(
+    show_availability: $show_availability,
+    one_time: $one_time,
+    is_repeating: $is_repeating,
+    startDate: $startDate,
+    endDate: $endDate
+  ) {
+    id
+    day_of_week
+    duration_string
+    is_repeating
+    range_start
+    range_end
+    resourceId
+    timezone_abbr
+    user {
+      email
+    }
+  }
+}
+
+"""

@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": ["null", "string"]
+        },
+        "day_of_week": {
+            "type": ["null", "integer"]
+        },
+        "duration_string": {
+            "type": ["null", "string"]
+        },
+        "is_repeating": {
+            "type": ["null", "boolean"]
+        },
+        "range_start": {
+            "type": ["null", "string"]
+        },
+        "range_end": {
+            "type": ["null", "string"]
+        },
+        "resourceId": {
+            "type": ["null", "string"]
+        },
+        "timezone_abbr": {
+            "type": ["null", "string"]
+        },
+        "user": {
+            "type": ["null", "object"],
+            "properties": {
+                "email": {
+                    "type": ["null", "string"]
+                }
+            }
+        }
+    }
+}

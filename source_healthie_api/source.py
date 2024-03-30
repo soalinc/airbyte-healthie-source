@@ -25,6 +25,7 @@ from .graph_ql_queries import (
     organization_members_query,
     programs_query,
     unassociated_completed_onboarding_items_query,
+    availabilities_query,
 )
 
 
@@ -491,6 +492,63 @@ class UnassociatedCompletedOnboardingItems(HealthieApiStream):
         return {"query": unassociated_completed_onboarding_items_query, "variables": variables}
 
 
+class OneTimeAvailabilities(HealthieApiStream):
+    primary_key = "id"
+    
+    def parse_response(
+        self,
+        response: requests.Response,
+        stream_state: Mapping[str, Any],
+        stream_slice: Mapping[str, Any] = None,
+        next_page_token: Mapping[str, Any] = None,
+    ) -> Iterable[Mapping]:
+        data = response.json().get("data").get("availabilities")
+        return data
+
+    def request_body_json(
+        self,
+        stream_state: Optional[Mapping[str, Any]],
+        stream_slice: Optional[Mapping[str, Any]] = None,
+        next_page_token: Optional[Mapping[str, Any]] = None,
+    ) -> Optional[Mapping[str, Any]]:
+
+        variables = {
+            "one_time": True
+        }
+        if next_page_token:
+            variables = next_page_token
+
+        return {"query": availabilities_query, "variables": variables}
+
+
+class RepeatingAvailabilities(HealthieApiStream):
+    primary_key = "id"
+    
+    def parse_response(
+        self,
+        response: requests.Response,
+        stream_state: Mapping[str, Any],
+        stream_slice: Mapping[str, Any] = None,
+        next_page_token: Mapping[str, Any] = None,
+    ) -> Iterable[Mapping]:
+        data = response.json().get("data").get("availabilities")
+        return data
+
+    def request_body_json(
+        self,
+        stream_state: Optional[Mapping[str, Any]],
+        stream_slice: Optional[Mapping[str, Any]] = None,
+        next_page_token: Optional[Mapping[str, Any]] = None,
+    ) -> Optional[Mapping[str, Any]]:
+
+        variables = {
+            "is_repeating": True
+        }
+        if next_page_token:
+            variables = next_page_token
+
+        return {"query": availabilities_query, "variables": variables}
+
 # Source
 class SourceHealthieApi(AbstractSource):
     def check_connection(self, logger, config) -> Tuple[bool, any]:
@@ -555,4 +613,6 @@ class SourceHealthieApi(AbstractSource):
             OrganizationMembers(authenticator=auth, config=config),
             Programs(authenticator=auth, config=config),
             UnassociatedCompletedOnboardingItems(authenticator=auth, config=config),
+            OneTimeAvailabilities(authenticator=auth, config=config),
+            RepeatingAvailabilities(authenticator=auth, config=config),
         ]
