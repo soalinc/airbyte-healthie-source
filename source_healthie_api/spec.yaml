@@ -16,7 +16,7 @@ connectionSpecification:
       description: The base url for the Healthie API.
     startDate:
       type: string
-      description: The start date from which to retrieve data (ex. Wed Dec 1 2021)
+      description: The start date from which to retrieve data (format. Wed Dec 1 2021, default - 7 days ago)
     endDate:
       type: string
-      description: The end date from which to retrieve data (ex. Wed Dec 1 2021)
+      description: The end date from which to retrieve data (format - Wed Dec 1 2021, default - today)

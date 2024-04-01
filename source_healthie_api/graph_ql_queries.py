@@ -329,6 +329,7 @@ query(
     range_end
     resourceId
     timezone_abbr
+    appointment_type_id
     user {
       email
     }

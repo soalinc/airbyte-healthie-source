@@ -26,6 +26,9 @@
         "timezone_abbr": {
             "type": ["null", "string"]
         },
+        "appointment_type_id": {
+            "type": ["null", "integer"]
+        },
         "user": {
             "type": ["null", "object"],
             "properties": {
