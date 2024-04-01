@@ -5,6 +5,7 @@
 
 from abc import ABC
 from typing import Any, Iterable, List, Mapping, MutableMapping, Optional, Tuple
+from datetime import datetime, timedelta
 
 import requests
 import json
@@ -492,8 +493,13 @@ class UnassociatedCompletedOnboardingItems(HealthieApiStream):
         return {"query": unassociated_completed_onboarding_items_query, "variables": variables}
 
 
-class OneTimeAvailabilities(HealthieApiStream):
+class Availabilities(HealthieApiStream):
     primary_key = "id"
+
+    def __init__(self, config: Mapping[str, Any], **kwargs):
+        super().__init__(**kwargs)
+        self.startDate = config.get("startDate")
+        self.endDate = config.get("endDate")
     
     def parse_response(
         self,
@@ -512,37 +518,22 @@ class OneTimeAvailabilities(HealthieApiStream):
         next_page_token: Optional[Mapping[str, Any]] = None,
     ) -> Optional[Mapping[str, Any]]:
 
+        current_datetime = datetime.now()
+        week_before_datetime = current_datetime - timedelta(days=7)
+
+        formatted_current_day = current_datetime.strftime("%a %b %d %Y")
+        formatted_end_date = formatted_current_day + " 12:00:00 GMT-0400 (Eastern Daylight Time)"
+
+        formatted_week_before_day = week_before_datetime.strftime("%a %b %d %Y")
+        formatted_start_date = formatted_week_before_day + " 12:00:00 GMT-0400 (Eastern Daylight Time)"
+        
         variables = {
-            "one_time": True
-        }
-        if next_page_token:
-            variables = next_page_token
-
-        return {"query": availabilities_query, "variables": variables}
-
-
-class RepeatingAvailabilities(HealthieApiStream):
-    primary_key = "id"
-    
-    def parse_response(
-        self,
-        response: requests.Response,
-        stream_state: Mapping[str, Any],
-        stream_slice: Mapping[str, Any] = None,
-        next_page_token: Mapping[str, Any] = None,
-    ) -> Iterable[Mapping]:
-        data = response.json().get("data").get("availabilities")
-        return data
-
-    def request_body_json(
-        self,
-        stream_state: Optional[Mapping[str, Any]],
-        stream_slice: Optional[Mapping[str, Any]] = None,
-        next_page_token: Optional[Mapping[str, Any]] = None,
-    ) -> Optional[Mapping[str, Any]]:
-
-        variables = {
-            "is_repeating": True
+            "is_repeating": True,
+            "show_availability": True,
+            "is_org": True,
+            "one_time": True,
+            "startDate": self.startDate or formatted_start_date,
+            "endDate": self.endDate or formatted_end_date
         }
         if next_page_token:
             variables = next_page_token
@@ -613,6 +604,5 @@ class SourceHealthieApi(AbstractSource):
             OrganizationMembers(authenticator=auth, config=config),
             Programs(authenticator=auth, config=config),
             UnassociatedCompletedOnboardingItems(authenticator=auth, config=config),
-            OneTimeAvailabilities(authenticator=auth, config=config),
-            RepeatingAvailabilities(authenticator=auth, config=config),
+            Availabilities(authenticator=auth, config=config),
         ]

@@ -1,370 +1,667 @@
 {
-  "streams": [
-    {
-      "stream": {
-        "name": "users",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": ["null", "string"]
-            }
-          }
+    "streams": [
+        {
+            "stream": {
+                "name": "users",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "appointment_types",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-              "type": ["null", "string"]
-              },
-              "name": {
-                  "type": ["null", "string"]
-              },
-              "available_contact_types": {
-                  "type": ["null", "array"],
-                  "items": {
-                      "type": ["null", "string"]
-                  }
-              },
-              "length": {
-                  "type": ["null", "integer"]
-              },
-              "is_group": {
-                  "type": ["null", "boolean"]
-              },
-              "is_waitlist_enabled": {
-                  "type": ["null", "boolean"]
-              }
-          }
+        {
+            "stream": {
+                "name": "appointment_types",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "available_contact_types": {
+                            "type": [
+                                "null",
+                                "array"
+                            ],
+                            "items": {
+                                "type": [
+                                    "null",
+                                    "string"
+                                ]
+                            }
+                        },
+                        "length": {
+                            "type": [
+                                "null",
+                                "integer"
+                            ]
+                        },
+                        "is_group": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "is_waitlist_enabled": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "appointments",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "date": {
-                  "type": ["null", "string"],
-                  "format": "date-time"
-              },
-              "contact_type": {
-                  "type": ["null", "string"]
-              },
-              "length": {
-                  "type": ["null", "integer"]
-              },
-              "location": {
-                  "type": ["null", "string"]
-              },
-              "provider": {
-                  "type": "object",
-                  "properties": {
-                      "id": {
-                          "type": ["null", "string"]
-                      },
-                      "full_name": {
-                          "type": ["null", "string"]
-                      }
-                  }
-              },
-              "appointment_type": {
-                  "type": "object",
-                  "properties": {
-                      "name": {
-                          "type": ["null", "string"]
-                      },
-                      "id": {
-                          "type": ["null", "string"]
-                      }
-                  }
-              },
-              "attendees": {
-                  "type": ["null", "array"],
-                  "items": {
-                      "type": "object",
-                      "properties": {
-                          "id": {
-                              "type": ["null", "string"]
-                          },
-                          "full_name": {
-                              "type": ["null", "string"]
-                          },
-                          "first_name": {
-                              "type": ["null", "string"]
-                          },
-                          "avatar_url": {
-                              "type": ["null", "string"]
-                          },
-                          "phone_number": {
-                              "type": ["null", "string"]
-                          }
-                      }
-                  }
-              }
-          }
+        {
+            "stream": {
+                "name": "appointments",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "date": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "date-time"
+                        },
+                        "contact_type": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "length": {
+                            "type": [
+                                "null",
+                                "integer"
+                            ]
+                        },
+                        "location": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "provider": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "full_name": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        },
+                        "appointment_type": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        },
+                        "attendees": {
+                            "type": [
+                                "null",
+                                "array"
+                            ],
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "full_name": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "first_name": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "avatar_url": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "phone_number": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "available_item_types",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "name": {
-                  "type": ["null", "string"]
-              },
-              "item_type": {
-                  "type": ["null", "string"]
-              }
-          }
+        {
+            "stream": {
+                "name": "available_item_types",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "item_type": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "conversations",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-              "type": ["null", "string"]
-              },
-              "display_name": {
-                  "type": ["null", "string"]
-              },
-              "archived": {
-                  "type": ["null", "boolean"]
-              },
-              "viewed": {
-                  "type": ["null", "boolean"]
-              },
-              "convo": {
-                  "type": "object",
-                  "properties": {
-                      "id": {
-                          "type": ["null", "string"]
-                      },
-                      "conversation_memberships_count": {
-                          "type": ["null", "integer"]
-                      }
-                  }
-              }
-          }
+        {
+            "stream": {
+                "name": "conversations",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "display_name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "archived": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "viewed": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "convo": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "conversation_memberships_count": {
+                                    "type": [
+                                        "null",
+                                        "integer"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "form_completion_requests",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "item_type": {
-                  "type": ["null", "string"]
-              }
-          }
+        {
+            "stream": {
+                "name": "form_completion_requests",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "item_type": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "forms",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "is_video": {
-                  "type": ["null", "boolean"]
-              },
-              "name": {
-                  "type": ["null", "string"]
-              },
-              "prefill": {
-                  "type": ["null", "boolean"]
-              },
-              "uploaded_by_healthie_team": {
-                  "type": ["null", "boolean"]
-              }
-          }
+        {
+            "stream": {
+                "name": "forms",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "is_video": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "prefill": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "uploaded_by_healthie_team": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "onboarding_flows",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "name": {
-                  "type": ["null", "string"]
-              },
-              "is_multiple_providers": {
-                  "type": ["null", "boolean"]
-              },
-              "has_forms_after_welcome": {
-                  "type": ["null", "boolean"]
-              }
-          }
+        {
+            "stream": {
+                "name": "onboarding_flows",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "is_multiple_providers": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "has_forms_after_welcome": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "organization_members",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-              "type": ["null", "string"]
-              },
-              "first_name": {
-                  "type": ["null", "string"]
-              },
-              "last_name": {
-                  "type": ["null", "string"]
-              },
-              "email": {
-                  "type": ["null", "string"]
-              },
-              "has_api_access": {
-                  "type": ["null", "boolean"]
-              }
-          }
+        {
+            "stream": {
+                "name": "organization_members",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "first_name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "last_name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "email": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "has_api_access": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "programs",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-              "type": ["null", "string"]
-              },
-              "name": {
-                  "type": ["null", "string"]
-              },
-              "description": {
-                  "type": ["null", "string"]
-              },
-              "course_type": {
-                  "type": ["null", "string"]
-              },
-              "available_contact_types": {
-                  "type": ["null", "array"],
-                  "items": {
-                      "type": ["null", "object"],
-                      "properties": {
-                          "id": {
-                              "type": ["null", "string"]
-                          },
-                          "category": {
-                              "type": ["null", "string"]
-                          },
-                          "item_type": {
-                              "type": ["null", "string"]
-                          },
-                          "item_id": {
-                              "type": ["null", "string"]
-                          }
-                      }
-                  }
-              },
-              "start_date": {
-                  "type": ["null", "string"]
-              }
-          }
+        {
+            "stream": {
+                "name": "programs",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "description": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "course_type": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "available_contact_types": {
+                            "type": [
+                                "null",
+                                "array"
+                            ],
+                            "items": {
+                                "type": [
+                                    "null",
+                                    "object"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "category": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "item_type": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    },
+                                    "item_id": {
+                                        "type": [
+                                            "null",
+                                            "string"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "start_date": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    },
-    {
-      "stream": {
-        "name": "unassociated_completed_onboarding_items",
-        "json_schema": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": ["null", "string"]
-              },
-              "item_type": {
-                  "type": ["null", "string"]
-              },
-              "item_id": {
-                  "type": ["null", "string"]
-              },
-              "onboarding_item_id": {
-                  "type": ["null", "string"]
-              },
-              "skipped": {
-                  "type": ["null", "boolean"]
-              },
-              "user": {
-                  "type": ["null", "object"],
-                  "properties": {
-                      "id": {
-                          "type": ["null", "string"]
-                      }
-                  }
-              }
-          }
+        {
+            "stream": {
+                "name": "unassociated_completed_onboarding_items",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "item_type": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "item_id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "onboarding_item_id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "skipped": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "user": {
+                            "type": [
+                                "null",
+                                "object"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
         },
-        "supported_sync_modes": ["full_refresh"]
-      },
-      "sync_mode": "full_refresh",
-      "destination_sync_mode": "overwrite"
-    }
-  ]
+        {
+            "stream": {
+                "name": "availabilities",
+                "json_schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "day_of_week": {
+                            "type": [
+                                "null",
+                                "integer"
+                            ]
+                        },
+                        "duration_string": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "is_repeating": {
+                            "type": [
+                                "null",
+                                "boolean"
+                            ]
+                        },
+                        "range_start": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "range_end": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "resourceId": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "timezone_abbr": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "user": {
+                            "type": [
+                                "null",
+                                "object"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "supported_sync_modes": [
+                    "full_refresh"
+                ]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
+        }
+    ]
 }

@@ -310,6 +310,7 @@ query(
   $one_time: Boolean,
   $is_repeating: Boolean,
   $startDate: String,
+  $is_org: Boolean,
   $endDate: String
 ) {
   availabilities(
@@ -317,7 +318,8 @@ query(
     one_time: $one_time,
     is_repeating: $is_repeating,
     startDate: $startDate,
-    endDate: $endDate
+    endDate: $endDate,
+    is_org: $is_org,
   ) {
     id
     day_of_week
@@ -332,5 +334,4 @@ query(
     }
   }
 }
-
 """
