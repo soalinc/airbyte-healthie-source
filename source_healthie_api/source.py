@@ -497,7 +497,7 @@ class Availabilities(HealthieApiStream):
     primary_key = "id"
 
     def __init__(self, config: Mapping[str, Any], **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(config, **kwargs)
         self.startDate = config.get("startDate")
         self.endDate = config.get("endDate")
     
